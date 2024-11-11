@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  postgis:
+    image: postgis/postgis:latest
+    container_name: postgis_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+        - postgis_data:/var/lib/postgresql/data
+        - .:/setup
+    networks:
+      - postgis_network
+
+volumes:
+  postgis_data:
+
+networks:
+  postgis_network:
+    driver: bridge
